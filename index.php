@@ -6,10 +6,19 @@
     </head>
     <body>
         <?php
+        require 'auxiliar.php';
+        
+        $pdo = conectar();
+        if (isset($_POST['id'])) {
+          $id = $_POST['id'];
+          $st = $pdo->prepare('DELETE FROM productos WHERE id = :id');
+          $st->execute([':id' => "$id"]);
+        }
+
+
         $buscarArticulo = isset($_GET['buscarArticulo'])
                         ? trim($_GET['buscarArticulo'])
                         : '';
-        $pdo = new PDO('pgsql:host=localhost;dbname=prueba','prueba','prueba');
         $st = $pdo->prepare('SELECT p.*, genero
                             FROM productos p
                             JOIN generos g
@@ -52,7 +61,7 @@
                     <td><?= $fila['precio'] ?></td>
                     <td><?= $fila['descripcion'] ?></td>
                     <td><?= $fila['genero'] ?></td>
-                    <td><a>Borrar</a></td>
+                    <td><a href="confirm_borrado.php?id=<?= $fila['id'] ?>">Borrar</a></td>
                 </tr>
                 <?php endwhile ?>
             </tbody>
