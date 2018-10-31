@@ -7,12 +7,21 @@
     <body>
         <?php
         require 'auxiliar.php';
-        
+
         $pdo = conectar();
         if (isset($_POST['id'])) {
           $id = $_POST['id'];
+          if (buscarArticulo($pdo, $id)) {
           $st = $pdo->prepare('DELETE FROM productos WHERE id = :id');
           $st->execute([':id' => "$id"]);
+          ?>
+                <h3>Articulo borrado correctamente.</h3>
+        <?php
+          } else {
+            ?>
+            <h3>Error: El articulo no existe!</h3>
+            <?php
+          }
         }
 
 

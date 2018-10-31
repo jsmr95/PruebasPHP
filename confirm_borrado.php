@@ -6,9 +6,17 @@
   </head>
   <body>
     <?php
+    require 'auxiliar.php';
+
+    $pdo = conectar();
     if (isset($_GET['id'])) {
       $id = $_GET['id'];
-    } 
+    } else {
+      header('Location: index.php');
+    }
+    if (!buscarArticulo($pdo,$id)){
+      header('Location: index.php');
+    }
      ?>
     <h3>¿Seguro que quieres borrar el articulo?</h3>
     <form action="index.php" method="post">
