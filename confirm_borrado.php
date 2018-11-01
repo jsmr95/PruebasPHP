@@ -2,7 +2,10 @@
 <html lang="es" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Confirmar borrado</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
     <?php
@@ -18,11 +21,21 @@
       header('Location: index.php');
     }
      ?>
-    <h3>¿Seguro que quieres borrar el articulo?</h3>
-    <form action="index.php" method="post">
-      <input type="hidden" name="id" value="<?= $id ?>">
-      <input type="submit" value="Si">
-      <a href="index.php">No</a>
-    </form>
-  </body>
+     <div class="container">
+       <div class="row">
+         <div class="col-md-12">
+           <h3>¿Seguro que quieres borrar el articulo?</h3>
+           <form action="index.php" method="post" class="form-inline">
+             <div class="form-group">
+               <input type="hidden" name="id" value="<?= $id ?>">
+               <input type="submit" value="Si" class="btn btn-danger">
+             </div>
+             <a href="index.php" class="btn btn-success">No</a>
+           </form>
+         </div>
+       </div>
+     </div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ </body>
 </html>
