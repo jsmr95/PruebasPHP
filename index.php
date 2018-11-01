@@ -20,7 +20,7 @@
           if (isset($_POST['id'])) {
             $id = $_POST['id'];
             if (buscarArticulo($pdo, $id)) {
-            $st = $pdo->prepare('DELETE FROM productos WHERE id = :id');
+            $st = $pdo->prepare('DELETE FROM articulos WHERE id = :id');
             $st->execute([':id' => "$id"]);
             ?>
                   <h3>Articulo borrado correctamente.</h3>
@@ -37,7 +37,7 @@
                           ? trim($_GET['buscarArticulo'])
                           : '';
           $st = $pdo->prepare('SELECT p.*, genero
-                              FROM productos p
+                              FROM articulos p
                               JOIN generos g
                               ON genero_id = g.id
                               WHERE position(lower(:articulo) in lower(articulo)) != 0'); //position es como mb_substrpos() de php, devuelve 0
