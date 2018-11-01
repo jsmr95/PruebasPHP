@@ -31,11 +31,24 @@
               <?php
             }
           }
-
-
+          //Comprueba si esta buscando articulo por nombre
           $buscarArticulo = isset($_GET['buscarArticulo'])
                           ? trim($_GET['buscarArticulo'])
                           : '';
+          $buscarMarca = isset($_GET['buscarMarca'])
+                          ? trim($_GET['buscarMarca'])
+                          : '';
+          if ($buscarMarca != '') {
+            $st = $pdo->prepare('SELECT p.*, genero
+                                FROM productos p
+                                JOIN generos g
+                                ON genero_id = g.id
+                                WHERE position(lower(:articulo) in lower(articulo)) != 0
+                                AND position(lower(:marca) in lower(marca)) != 0'); //position es como mb_substrpos() de php, devuelve 0
+                                                                                        //si no encuentra nada. ponemos lower() de postgre para
+                                                                                        //que no distinga entre mayu y minus
+            $st->execute([':articulo' => "$buscarArticulo", ':marca' => "$buscarMarca"]);
+          } else {
           $st = $pdo->prepare('SELECT p.*, genero
                               FROM productos p
                               JOIN generos g
@@ -43,21 +56,28 @@
                               WHERE position(lower(:articulo) in lower(articulo)) != 0'); //position es como mb_substrpos() de php, devuelve 0
                                                                                       //si no encuentra nada. ponemos lower() de postgre para
                                                                                       //que no distinga entre mayu y minus
-          //En execute(:titulo => "$valor"), indicamos lo que vale nuestros marcadores de prepare(:titulo)
           $st->execute([':articulo' => "$buscarArticulo"]);
+        }
           ?>
         </div>
           <div class="row" id="busqueda">
             <div class="col-md-12">
-            <!-- Creamos un buscador de peliculas -->
               <fieldset>
                   <legend>Buscar</legend>
+                  <!-- Creamos un buscador de articulos por nombre-->
                   <form action="" method="get" class="form-inline">
                     <div class="form-group">
                       <label for="buscarArticulo">Buscar por nombre:</label>
                       <input id="buscarArticulo" type="text" name="buscarArticulo"
                       value="<?= $buscarArticulo ?>" class="form-control">
                     </div>
+
+                  <!-- Creamos un buscador de articulos por marca--> <br>
+                    <div class="form-group">
+                      <label for="buscarMarca">Buscar por marca:</label>
+                      <input id="buscarMarca" type="text" name="buscarMarca"
+                      value="<?= $buscarMarca ?>" class="form-control">
+                    </div><br>
                     <input type="submit" value="Buscar" class="btn btn-primary">
                   </form>
               </fieldset>
