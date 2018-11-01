@@ -6,9 +6,9 @@ CREATE TABLE generos
   , genero VARCHAR(255) NOT NULL UNIQUE
 );
 
-DROP TABLE IF EXISTS articulos CASCADE;
+DROP TABLE IF EXISTS productos CASCADE;
 
-CREATE TABLE articulos
+CREATE TABLE productos
 (
     id        BIGSERIAL    PRIMARY KEY
   , articulo  VARCHAR(255) NOT NULL
