@@ -23,15 +23,15 @@
      ?>
      <div class="container">
        <div class="row">
-         <div class="col-md-12">
            <h3>¿Seguro que quieres borrar el articulo?</h3>
-           <form action="index.php" method="post" class="form-inline">
-             <div class="form-group">
-               <input type="hidden" name="id" value="<?= $id ?>">
-               <input type="submit" value="Si" class="btn btn-danger">
-             </div>
-             <a href="index.php" class="btn btn-success">No</a>
-           </form>
+           <div class="col-mg-4">
+             <form action="index.php" method="post" class="form-inline">
+               <div class="form-group">
+                 <input type="hidden" name="id" value="<?= $id ?>">
+                 <input type="submit" value="Si" class="btn btn-danger">
+               </div>
+               <a href="index.php" class="btn btn-success">No</a>
+             </form>
          </div>
        </div>
      </div>
