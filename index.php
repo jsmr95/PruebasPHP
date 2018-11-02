@@ -38,6 +38,9 @@
           $buscarMarca = isset($_GET['buscarMarca'])
                           ? trim($_GET['buscarMarca'])
                           : '';
+          $buscarGenero = isset($_GET['buscarGenero'])
+                          ? trim($_GET['buscarGenero'])
+                          : '';
           if ($buscarMarca != '') {
             $st = $pdo->prepare('SELECT p.*, genero
                                 FROM productos p
@@ -73,10 +76,16 @@
                     </div>
 
                   <!-- Creamos un buscador de articulos por marca--> <br>
+                  <div class="form-group">
+                    <label for="buscarMarca">Buscar por marca:</label>
+                    <input id="buscarMarca" type="text" name="buscarMarca"
+                    value="<?= $buscarMarca ?>" class="form-control">
+                  </div>
+                    <!-- Creamos un buscador de articulos por genero--> <br>
                     <div class="form-group">
-                      <label for="buscarMarca">Buscar por marca:</label>
-                      <input id="buscarMarca" type="text" name="buscarMarca"
-                      value="<?= $buscarMarca ?>" class="form-control">
+                      <label for="buscarGenero">Buscar por género:</label>
+                      <input id="buscarGenero" type="text" name="buscarGenero"
+                      value="<?= $buscarGenero ?>" class="form-control">
                     </div><br>
                     <input type="submit" value="Buscar" class="btn btn-primary">
                   </form>
