@@ -38,26 +38,11 @@
           $buscarMarca = isset($_GET['buscarMarca'])
                           ? trim($_GET['buscarMarca'])
                           : '';
-          if ($buscarMarca != '') {
-            $st = $pdo->prepare('SELECT p.*, genero
-                                FROM productos p
-                                JOIN generos g
-                                ON genero_id = g.id
-                                WHERE position(lower(:articulo) in lower(articulo)) != 0
-                                AND position(lower(:marca) in lower(marca)) != 0'); //position es como mb_substrpos() de php, devuelve 0
-                                                                                        //si no encuentra nada. ponemos lower() de postgre para
-                                                                                        //que no distinga entre mayu y minus
-            $st->execute([':articulo' => "$buscarArticulo", ':marca' => "$buscarMarca"]);
-          } else {
-          $st = $pdo->prepare('SELECT p.*, genero
-                              FROM productos p
-                              JOIN generos g
-                              ON genero_id = g.id
-                              WHERE position(lower(:articulo) in lower(articulo)) != 0'); //position es como mb_substrpos() de php, devuelve 0
-                                                                                      //si no encuentra nada. ponemos lower() de postgre para
-                                                                                      //que no distinga entre mayu y minus
-          $st->execute([':articulo' => "$buscarArticulo"]);
-        }
+          $buscarGenero = isset($_GET['buscarGenero'])
+                          ? trim($_GET['buscarGenero'])
+                          : '';
+          $st = compruebaBuscadores($pdo,$buscarArticulo,$buscarMarca,$buscarGenero);
+
           ?>
         </div>
           <div class="row" id="busqueda">
@@ -73,10 +58,16 @@
                     </div>
 
                   <!-- Creamos un buscador de articulos por marca--> <br>
+                  <div class="form-group">
+                    <label for="buscarMarca">Buscar por marca:</label>
+                    <input id="buscarMarca" type="text" name="buscarMarca"
+                    value="<?= $buscarMarca ?>" class="form-control">
+                  </div>
+                    <!-- Creamos un buscador de articulos por genero--> <br>
                     <div class="form-group">
-                      <label for="buscarMarca">Buscar por marca:</label>
-                      <input id="buscarMarca" type="text" name="buscarMarca"
-                      value="<?= $buscarMarca ?>" class="form-control">
+                      <label for="buscarGenero">Buscar por género:</label>
+                      <input id="buscarGenero" type="text" name="buscarGenero"
+                      value="<?= $buscarGenero ?>" class="form-control">
                     </div><br>
                     <input type="submit" value="Buscar" class="btn btn-primary">
                   </form>
