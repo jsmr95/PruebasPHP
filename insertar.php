@@ -36,7 +36,7 @@
             header('Location: index.php');
          } else {
            $pdo = conectar();
-           $st = $pdo->prepare('SELECT genero
+           $st = $pdo->prepare('SELECT *
                                FROM generos');
            $st->execute([]);
          }
@@ -68,8 +68,9 @@
                         <div class="form-group">
                             <label for="genero_id">Género</label>
                             <select class="form-control" name="genero_id" id="genero_id">
+                            <!-- Recorremos la sentencia para ir mostrando cada genero en las opciones -->
                             <?php while ($fila = $st->fetch()): ?>
-                            <option value="<?= $fila['genero'] ?>"> <?= $fila['genero'] ?> </option>
+                            <option value="<?= $fila['id'] ?>"> <?= $fila['genero'] ?> </option>
                           <?php endwhile ?>
                         </select>
                         </div>
