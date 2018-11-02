@@ -34,6 +34,11 @@
                 ':genero_id' => $genero_id,
             ]);
             header('Location: index.php');
+         } else {
+           $pdo = conectar();
+           $st = $pdo->prepare('SELECT genero
+                               FROM generos');
+           $st->execute([]);
          }
         ?>
         <br>
@@ -62,7 +67,11 @@
                         </div>
                         <div class="form-group">
                             <label for="genero_id">Género</label>
-                            <input type="text" name="genero_id" class="form-control" id="genero_id" value="<?= $genero_id ?>">
+                            <select class="form-control" name="genero_id" id="genero_id">
+                            <?php while ($fila = $st->fetch()): ?>
+                            <option value="<?= $fila['genero'] ?>"> <?= $fila['genero'] ?> </option>
+                          <?php endwhile ?>
+                        </select>
                         </div>
                         <input type="submit" value="Insertar" class="btn btn-success">
                         <a href="index.php" class="btn btn-info">Volver</a>
