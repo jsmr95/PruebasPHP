@@ -26,6 +26,7 @@
 
             $fltArticulo = compruebaArticulo($error);
             $fltMarca = compruebaMarca($error);
+            $fltPrecio = compruebaPrecio($error);
             $fltDescripcion = trim(filter_input(INPUT_POST,'descripcion'));
             $fltGeneroId = compruebaGeneroId($pdo,$error);
 
@@ -35,7 +36,7 @@
               $st->execute([
                   ':articulo' => $fltArticulo,
                   ':marca' => $fltMarca,
-                  ':precio' => $precio,
+                  ':precio' => $fltPrecio,
                   ':descripcion' => $fltDescripcion,
                   ':genero_id' => $fltGeneroId,
               ]);

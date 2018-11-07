@@ -13,7 +13,7 @@ CREATE TABLE productos
     id        BIGSERIAL    PRIMARY KEY
   , articulo  VARCHAR(255) NOT NULL
   , marca     VARCHAR(255) NOT NULL
-  , precio    NUMERIC(10,2)
+  , precio    NUMERIC(7,2)
   , descripcion  TEXT
   , genero_id BIGINT       NOT NULL
                            REFERENCES generos (id)

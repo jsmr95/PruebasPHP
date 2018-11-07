@@ -74,3 +74,13 @@
     }
     return $fltGeneroId;
   }
+
+  function compruebaPrecio(&$error){
+    $fltPrecio = filter_input(INPUT_POST,'precio',FILTER_VALIDATE_FLOAT, ['options' => ['precision' => 2]]);
+    if ($fltPrecio === false) {
+      $error[] = 'El precio debe llevar dos dígitos decimales.';
+    }elseif ($fltPrecio < 0 || $fltPrecio > 99999) {
+      $error[] = 'El precio debe estar entre 0,00 y 99.999';
+    }
+    return $fltPrecio;
+  }
