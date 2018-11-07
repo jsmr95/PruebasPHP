@@ -21,38 +21,46 @@
          if (isset($_POST['articulo'], $_POST['marca'], $_POST['precio'],
                   $_POST['descripcion'], $_POST['genero_id'])) {
             $error = [];
-            extract(array_map('trim', $_POST), EXTR_IF_EXISTS);
-
             $pdo = conectar();
-            $st = $pdo->prepare('INSERT INTO productos (articulo, marca, precio, descripcion, genero_id)
-                                 VALUES (:articulo, :marca, :precio, :descripcion, :genero_id)');
+            extract(array_map('trim', $_POST), EXTR_IF_EXISTS);
 
             $fltArticulo = trim(filter_input(INPUT_POST,'articulo'));
             if (mb_strlen($fltArticulo) > 255) {
-              $error[] = 'El nombre del articulo es demasiado largo.'
+              $error[] = 'El nombre del articulo es demasiado largo.';
             }
 
             $fltMarca = trim(filter_input(INPUT_POST,'marca'));
             if (mb_strlen($fltMarca) > 255) {
-              $error[] = 'El nombre de la marca es demasiado largo.'
+              $error[] = 'El nombre de la marca es demasiado largo.';
             }
 
+            $fltDescripcion = trim(filter_input(INPUT_POST,'descripcion'));
 
-
-            $st->execute([
-                ':articulo' => $articulo,
-                ':marca' => $marca,
-                ':precio' => $precio,
-                ':descripcion' => $descripcion,
-                ':genero_id' => $genero_id,
-            ]);
-            header('Location: index.php');
+            if (empty($error)) {
+              $st = $pdo->prepare('INSERT INTO productos (articulo, marca, precio, descripcion, genero_id)
+                                   VALUES (:articulo, :marca, :precio, :descripcion, :genero_id)');
+              $st->execute([
+                  ':articulo' => $fltArticulo,
+                  ':marca' => $fltMarca,
+                  ':precio' => $precio,
+                  ':descripcion' => $fltDescripcion,
+                  ':genero_id' => $genero_id,
+              ]);
+              header('Location: index.php');
+            }else {
+              foreach ($error as $err) {
+                echo "<h4>Error: $err</h4>";
+                $st = $pdo->prepare('SELECT *
+                                    FROM generos');
+                $st->execute([]);
+              }
+            }
          } else {
-           $pdo = conectar();
            $st = $pdo->prepare('SELECT *
                                FROM generos');
            $st->execute([]);
          }
+
         ?>
         <br>
         <div class="container">
