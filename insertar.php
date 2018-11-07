@@ -18,41 +18,30 @@
             'genero_id' => '',
         ];
          extract(PAR);
-         if (isset($_POST['articulo'], $_POST['marca'], $_POST['precio'],
-                  $_POST['descripcion'], $_POST['genero_id'])) {
+         try{
+
             $error = [];
             $pdo = conectar();
+            comprobarParametros(PAR);
             extract(array_map('trim', $_POST), EXTR_IF_EXISTS);
 
-            $fltArticulo = compruebaArticulo($error);
-            $fltMarca = compruebaMarca($error);
-            $fltPrecio = compruebaPrecio($error);
-            $fltDescripcion = trim(filter_input(INPUT_POST,'descripcion'));
-            $fltGeneroId = compruebaGeneroId($pdo,$error);
+            $flt['articulo'] = compruebaArticulo($error);
+            $flt['marca'] = compruebaMarca($error);
+            $flt['precio'] = compruebaPrecio($error);
+            $flt['descripcion'] = trim(filter_input(INPUT_POST,'descripcion'));
+            $flt['genero_id'] = compruebaGeneroId($pdo,$error);
+            comprobarErrores($error);
+            insertarPelicula($pdo,$flt);
 
-            if (empty($error)) {
-              $st = $pdo->prepare('INSERT INTO productos (articulo, marca, precio, descripcion, genero_id)
-                                   VALUES (:articulo, :marca, :precio, :descripcion, :genero_id)');
-              $st->execute([
-                  ':articulo' => $fltArticulo,
-                  ':marca' => $fltMarca,
-                  ':precio' => $fltPrecio,
-                  ':descripcion' => $fltDescripcion,
-                  ':genero_id' => $fltGeneroId,
-              ]);
-              header('Location: index.php');
-            }else {
-              foreach ($error as $err) {
-                echo "<h4>Error: $err</h4>";
+          }catch (EmptyParamException|ValidationException $e) {
                 $st = $pdo->prepare('SELECT *
                                     FROM generos');
                 $st->execute([]);
-              }
-            }
-         } else {
-           $st = $pdo->prepare('SELECT *
-                               FROM generos');
-           $st->execute([]);
+                foreach ($error as $err) {
+                  echo "<h4>Error: $err </h4>";
+                }
+          }catch(ParamException $e) {
+            header('Location: index.php');
          }
 
         ?>

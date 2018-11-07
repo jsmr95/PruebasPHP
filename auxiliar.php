@@ -16,7 +16,7 @@ class EmptyParamException extends Exception
   }
 
   function comprobarParametros($par){
-    if (emtpy($_POST)) {
+    if (empty($_POST)) {
       throw new EmptyParamException();
     }
     if (!empty(array_diff_key($par,$_POST)) ||
@@ -108,4 +108,10 @@ class EmptyParamException extends Exception
       $error[] = 'El precio debe estar entre 0,00 y 99.999';
     }
     return $fltPrecio;
+  }
+
+  function insertarPelicula($pdo,$flt){
+    $st = $pdo->prepare('INSERT INTO productos (articulo, marca, precio, descripcion, genero_id)
+                         VALUES (:articulo, :marca, :precio, :descripcion, :genero_id)');
+    $st->execute($flt);
   }
