@@ -18,28 +18,30 @@
             'genero_id' => '',
         ];
          extract(PAR);
-         if (isset($_POST['articulo'], $_POST['marca'], $_POST['precio'],
-                  $_POST['descripcion'], $_POST['genero_id'])) {
+         try{
+
+            $error = [];
+            $pdo = conectar();
+            comprobarParametros(PAR);
             extract(array_map('trim', $_POST), EXTR_IF_EXISTS);
 
-            // Filtrado de la entrada
-            $pdo = conectar();
-            $st = $pdo->prepare('INSERT INTO productos (articulo, marca, precio, descripcion, genero_id)
-                                 VALUES (:articulo, :marca, :precio, :descripcion, :genero_id)');
-            $st->execute([
-                ':articulo' => $articulo,
-                ':marca' => $marca,
-                ':precio' => $precio,
-                ':descripcion' => $descripcion,
-                ':genero_id' => $genero_id,
-            ]);
+            $flt['articulo'] = compruebaArticulo($error);
+            $flt['marca'] = compruebaMarca($error);
+            $flt['precio'] = compruebaPrecio($error);
+            $flt['descripcion'] = trim(filter_input(INPUT_POST,'descripcion'));
+            $flt['genero_id'] = compruebaGeneroId($pdo,$error);
+            comprobarErrores($error);
+            insertarPelicula($pdo,$flt);
             header('Location: index.php');
-         } else {
-           $pdo = conectar();
-           $st = $pdo->prepare('SELECT *
-                               FROM generos');
-           $st->execute([]);
+          }catch (EmptyParamException|ValidationException $e) {
+                $st = $pdo->prepare('SELECT *
+                                    FROM generos');
+                $st->execute([]);
+                //No hacemos nada
+          }catch(ParamException $e) {
+            header('Location: index.php');
          }
+
         ?>
         <br>
         <div class="container">
@@ -49,25 +51,29 @@
                 </div>
                 <div class="panel-body">
                     <form action="" method="post">
-                        <div class="form-group">
-                            <label for="articulo">Artículo</label>
+                        <div class="form-group <?= hasError('articulo',$error) ?>" >
+                            <label for="articulo" class="control-label">Artículo</label>
                             <input type="text" name="articulo" class="form-control" id="articulo" value="<?= $articulo ?>">
+                            <?php mensajeError('articulo', $error) ?>
                         </div>
-                        <div class="form-group">
-                            <label for="marca">Marca</label>
+                        <div class="form-group <?= hasError('marca',$error) ?>">
+                            <label for="marca" class="control-label">Marca</label>
                             <input type="text" name="marca" class="form-control" id="marca" value="<?= $marca ?>">
+                            <?php mensajeError('marca', $error) ?>
                         </div>
-                        <div class="form-group">
-                            <label for="precio">Precio</label>
+                        <div class="form-group <?= hasError('precio',$error) ?>">
+                            <label for="precio" class="control-label">Precio</label>
                             <input type="text" name="precio" class="form-control" id="precio" value="<?= $precio ?>">
+                            <?php mensajeError('precio', $error) ?>
                         </div>
                         <div class="form-group">
-                          <label for="descripcion">Descripción</label>
+                          <label for="descripcion" class="control-label">Descripción</label>
                           <textarea name="descripcion" rows="8" cols="80" class="form-control" id="descripcion"><?= $descripcion ?></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="genero_id">Género</label>
+                        <div class="form-group <?= hasError('genero_id',$error) ?>">
+                            <label for="genero_id" class="control-label">Género</label>
                             <select class="form-control" name="genero_id" id="genero_id">
+                              <?php mensajeError('genero_id', $error) ?>
                             <!-- Recorremos la sentencia para ir mostrando cada genero en las opciones -->
                             <?php while ($fila = $st->fetch()): ?>
                             <option value="<?= $fila['id'] ?>"> <?= $fila['genero'] ?> </option>
