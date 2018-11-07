@@ -1,5 +1,30 @@
 <?php
 
+class ValidationException extends Exception
+{}
+
+class ParamException extends Exception
+{}
+
+class EmptyParamException extends Exception
+{}
+
+  function comprobarErrores(&$error){
+    if (!empty($error)) {
+      throw new ValidationException();
+    }
+  }
+
+  function comprobarParametros($par){
+    if (emtpy($_POST)) {
+      throw new EmptyParamException();
+    }
+    if (!empty(array_diff_key($par,$_POST)) ||
+        !empty(array_diff_key($_POST, $par))) {
+          throw new ParamException();
+    }
+  }
+
   function conectar(){
     return new PDO('pgsql:host=localhost;dbname=prueba','prueba','prueba');
   }
