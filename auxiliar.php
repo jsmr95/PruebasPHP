@@ -117,5 +117,5 @@ class EmptyParamException extends Exception
   }
 
   function hasError($key, $error){
-    return array_key_exists($key, $error) ) 'has-error' : '';
+    return array_key_exists($key, $error) ? 'has-error' : '';
   }

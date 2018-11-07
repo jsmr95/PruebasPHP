@@ -53,24 +53,24 @@
                 </div>
                 <div class="panel-body">
                     <form action="" method="post">
-                        <div class="form-group">
-                            <label for="articulo">Artículo</label>
+                        <div class="form-group <?= hasError('articulo',$error) ?>" >
+                            <label for="articulo" class="control-label">Artículo</label>
                             <input type="text" name="articulo" class="form-control" id="articulo" value="<?= $articulo ?>">
                         </div>
-                        <div class="form-group">
-                            <label for="marca">Marca</label>
+                        <div class="form-group <?= hasError('marca',$error) ?>">
+                            <label for="marca" class="control-label">Marca</label>
                             <input type="text" name="marca" class="form-control" id="marca" value="<?= $marca ?>">
                         </div>
-                        <div class="form-group">
-                            <label for="precio">Precio</label>
+                        <div class="form-group <?= hasError('precio',$error) ?>">
+                            <label for="precio" class="control-label">Precio</label>
                             <input type="text" name="precio" class="form-control" id="precio" value="<?= $precio ?>">
                         </div>
                         <div class="form-group">
-                          <label for="descripcion">Descripción</label>
+                          <label for="descripcion" class="control-label">Descripción</label>
                           <textarea name="descripcion" rows="8" cols="80" class="form-control" id="descripcion"><?= $descripcion ?></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="genero_id">Género</label>
+                        <div class="form-group <?= hasError('genero_id',$error) ?>">
+                            <label for="genero_id" class="control-label">Género</label>
                             <select class="form-control" name="genero_id" id="genero_id">
                             <!-- Recorremos la sentencia para ir mostrando cada genero en las opciones -->
                             <?php while ($fila = $st->fetch()): ?>
