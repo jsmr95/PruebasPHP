@@ -71,9 +71,9 @@ class EmptyParamException extends Exception
   function compruebaArticulo(&$error){
     $fltArticulo = trim(filter_input(INPUT_POST,'articulo'));
     if ($fltArticulo === '') {
-      $error[] = 'El titulo es obligatorio.';
+      $error['articulo'] = 'El titulo es obligatorio.';
     }elseif (mb_strlen($fltArticulo) > 255) {
-      $error[] = 'El nombre del articulo es demasiado largo.';
+      $error['articulo'] = 'El nombre del articulo es demasiado largo.';
     }
     return $fltArticulo;
   }
@@ -81,7 +81,7 @@ class EmptyParamException extends Exception
   function compruebaMarca(&$error){
     $fltMarca = trim(filter_input(INPUT_POST,'marca'));
     if (mb_strlen($fltMarca) > 255) {
-      $error[] = 'El nombre de la marca es demasiado largo.';
+      $error['marca'] = 'El nombre de la marca es demasiado largo.';
     }
     return $fltMarca;
   }
@@ -92,10 +92,10 @@ class EmptyParamException extends Exception
       $st = $pdo->prepare('SELECT * from generos WHERE id = :id');
       $st->execute([':id' => $fltGeneroId]);
       if ($st->fetch() === false) {
-        $error[] = 'No existe ese género.';
+        $error['genero_id'] = 'No existe ese género.';
       }
     } else {
-      $error[] = 'El género no es correcto.';
+      $error['genero_id'] = 'El género no es correcto.';
     }
     return $fltGeneroId;
   }
@@ -103,9 +103,9 @@ class EmptyParamException extends Exception
   function compruebaPrecio(&$error){
     $fltPrecio = filter_input(INPUT_POST,'precio',FILTER_VALIDATE_FLOAT, ['options' => ['precision' => 2]]);
     if ($fltPrecio === false) {
-      $error[] = 'El precio debe llevar dos dígitos decimales.';
+      $error['precio'] = 'El precio debe llevar dos dígitos decimales.';
     }elseif ($fltPrecio < 0 || $fltPrecio > 99999) {
-      $error[] = 'El precio debe estar entre 0,00 y 99.999';
+      $error['precio'] = 'El precio debe estar entre 0,00 y 99.999';
     }
     return $fltPrecio;
   }
