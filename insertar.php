@@ -20,12 +20,25 @@
          extract(PAR);
          if (isset($_POST['articulo'], $_POST['marca'], $_POST['precio'],
                   $_POST['descripcion'], $_POST['genero_id'])) {
+            $error = [];
             extract(array_map('trim', $_POST), EXTR_IF_EXISTS);
 
-            // Filtrado de la entrada
             $pdo = conectar();
             $st = $pdo->prepare('INSERT INTO productos (articulo, marca, precio, descripcion, genero_id)
                                  VALUES (:articulo, :marca, :precio, :descripcion, :genero_id)');
+
+            $fltArticulo = trim(filter_input(INPUT_POST,'articulo'));
+            if (mb_strlen($fltArticulo) > 255) {
+              $error[] = 'El nombre del articulo es demasiado largo.'
+            }
+
+            $fltMarca = trim(filter_input(INPUT_POST,'marca'));
+            if (mb_strlen($fltMarca) > 255) {
+              $error[] = 'El nombre de la marca es demasiado largo.'
+            }
+
+
+
             $st->execute([
                 ':articulo' => $articulo,
                 ':marca' => $marca,
