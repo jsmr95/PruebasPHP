@@ -115,3 +115,7 @@ class EmptyParamException extends Exception
                          VALUES (:articulo, :marca, :precio, :descripcion, :genero_id)');
     $st->execute($flt);
   }
+
+  function hasError($key, $error){
+    return array_key_exists($key, $error) ) 'has-error' : '';
+  }
