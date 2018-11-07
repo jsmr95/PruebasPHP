@@ -37,9 +37,7 @@
                 $st = $pdo->prepare('SELECT *
                                     FROM generos');
                 $st->execute([]);
-                foreach ($error as $err) {
-                  echo "<h4>Error: $err </h4>";
-                }
+                //No hacemos nada
           }catch(ParamException $e) {
             header('Location: index.php');
          }
@@ -56,14 +54,17 @@
                         <div class="form-group <?= hasError('articulo',$error) ?>" >
                             <label for="articulo" class="control-label">Artículo</label>
                             <input type="text" name="articulo" class="form-control" id="articulo" value="<?= $articulo ?>">
+                            <?php mensajeError('articulo', $error) ?>
                         </div>
                         <div class="form-group <?= hasError('marca',$error) ?>">
                             <label for="marca" class="control-label">Marca</label>
                             <input type="text" name="marca" class="form-control" id="marca" value="<?= $marca ?>">
+                            <?php mensajeError('marca', $error) ?>
                         </div>
                         <div class="form-group <?= hasError('precio',$error) ?>">
                             <label for="precio" class="control-label">Precio</label>
                             <input type="text" name="precio" class="form-control" id="precio" value="<?= $precio ?>">
+                            <?php mensajeError('precio', $error) ?>
                         </div>
                         <div class="form-group">
                           <label for="descripcion" class="control-label">Descripción</label>
@@ -72,6 +73,7 @@
                         <div class="form-group <?= hasError('genero_id',$error) ?>">
                             <label for="genero_id" class="control-label">Género</label>
                             <select class="form-control" name="genero_id" id="genero_id">
+                              <?php mensajeError('genero_id', $error) ?>
                             <!-- Recorremos la sentencia para ir mostrando cada genero en las opciones -->
                             <?php while ($fila = $st->fetch()): ?>
                             <option value="<?= $fila['id'] ?>"> <?= $fila['genero'] ?> </option>
