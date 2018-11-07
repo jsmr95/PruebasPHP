@@ -24,16 +24,8 @@
             $pdo = conectar();
             extract(array_map('trim', $_POST), EXTR_IF_EXISTS);
 
-            $fltArticulo = trim(filter_input(INPUT_POST,'articulo'));
-            if (mb_strlen($fltArticulo) > 255) {
-              $error[] = 'El nombre del articulo es demasiado largo.';
-            }
-
-            $fltMarca = trim(filter_input(INPUT_POST,'marca'));
-            if (mb_strlen($fltMarca) > 255) {
-              $error[] = 'El nombre de la marca es demasiado largo.';
-            }
-
+            $fltArticulo = compruebaArticulo($error);
+            $fltMarca = compruebaMarca($error);
             $fltDescripcion = trim(filter_input(INPUT_POST,'descripcion'));
 
             if (empty($error)) {

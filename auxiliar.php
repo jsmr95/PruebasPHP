@@ -42,3 +42,21 @@
     }
     return $st;
   }
+
+  function compruebaArticulo(&$error){
+    $fltArticulo = trim(filter_input(INPUT_POST,'articulo'));
+    if ($fltArticulo === '') {
+      $error[] = 'El titulo es obligatorio.';
+    }elseif (mb_strlen($fltArticulo) > 255) {
+      $error[] = 'El nombre del articulo es demasiado largo.';
+    }
+    return $fltArticulo;
+  }
+
+  function compruebaMarca(&$error){
+    $fltMarca = trim(filter_input(INPUT_POST,'marca'));
+    if (mb_strlen($fltMarca) > 255) {
+      $error[] = 'El nombre de la marca es demasiado largo.';
+    }
+    return $fltMarca;
+  }
