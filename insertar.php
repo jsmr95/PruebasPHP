@@ -32,7 +32,7 @@
             $flt['genero_id'] = compruebaGeneroId($pdo,$error);
             comprobarErrores($error);
             insertarPelicula($pdo,$flt);
-
+            header('Location: index.php');
           }catch (EmptyParamException|ValidationException $e) {
                 $st = $pdo->prepare('SELECT *
                                     FROM generos');
