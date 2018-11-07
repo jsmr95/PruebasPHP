@@ -60,3 +60,17 @@
     }
     return $fltMarca;
   }
+
+  function compruebaGeneroId($pdo, &$error){
+    $fltGeneroId = filter_input(INPUT_POST,'genero_id',FILTER_VALIDATE_INT);
+    if ($fltGeneroId !== false) {
+      $st = $pdo->prepare('SELECT * from generos WHERE id = :id');
+      $st->execute([':id' => $fltGeneroId]);
+      if ($st->fetch() === false) {
+        $error[] = 'No existe ese género.';
+      }
+    } else {
+      $error[] = 'El género no es correcto.';
+    }
+    return $fltGeneroId;
+  }

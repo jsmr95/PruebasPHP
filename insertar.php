@@ -27,6 +27,7 @@
             $fltArticulo = compruebaArticulo($error);
             $fltMarca = compruebaMarca($error);
             $fltDescripcion = trim(filter_input(INPUT_POST,'descripcion'));
+            $fltGeneroId = compruebaGeneroId($pdo,$error);
 
             if (empty($error)) {
               $st = $pdo->prepare('INSERT INTO productos (articulo, marca, precio, descripcion, genero_id)
@@ -36,7 +37,7 @@
                   ':marca' => $fltMarca,
                   ':precio' => $precio,
                   ':descripcion' => $fltDescripcion,
-                  ':genero_id' => $genero_id,
+                  ':genero_id' => $fltGeneroId,
               ]);
               header('Location: index.php');
             }else {
