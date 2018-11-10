@@ -73,7 +73,7 @@
               <?php endwhile ?>
             </select>
             </div>
-            <input type="submit" value="Insertar" class="btn btn-success">
+            <input type="submit" value="Modificar" class="btn btn-success">
             <a href="index.php" class="btn btn-info">Volver</a>
           </form>
         </div>
