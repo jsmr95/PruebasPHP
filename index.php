@@ -17,6 +17,8 @@
         <div class="row">
           <?php
           require 'auxiliar.php';
+          comprobarSession('mensaje', 'success');
+          comprobarSession('mensaje', 'error');
 
           $pdo = conectar();
           if (isset($_POST['id'])) {
@@ -24,13 +26,13 @@
             if (buscarArticulo($pdo, $id)) {
             $st = $pdo->prepare('DELETE FROM productos WHERE id = :id');
             $st->execute([':id' => "$id"]);
-            ?>
-                  <h3>Articulo borrado correctamente.</h3>
-          <?php
+            if (buscarArticulo($pdo, $id) === false) {
+              $_SESSION['mensaje'] = 'El producto ha sido borrado correctamente.';
+              header('Location: index.php');
+            }
             } else {
-              ?>
-              <h3>Error: El articulo no existe!</h3>
-              <?php
+              $_SESSION['error'] = 'El producto no existe.';
+              header('Location: index.php');
             }
           }
           //Comprueba si esta buscando algun articulo

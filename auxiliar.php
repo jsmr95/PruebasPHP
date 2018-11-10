@@ -214,3 +214,15 @@ function mostrarFormulario($pdo,$fila,$error,$accion){
 function h($cadena){
     return htmlspecialchars($cadena, ENT_QUOTES);
 }
+
+function comprobarSession($var, $tipo){ ?>
+  <br>
+    <?php if (isset($_SESSION["$var"])): ?>
+        <div class="row">
+            <div class="alert alert-<?=$tipo?>" role="alert">
+                <?= $_SESSION["$var"] ?>
+            </div>
+        </div>
+        <?php unset($_SESSION["$var"]); ?>
+    <?php endif;
+}
