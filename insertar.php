@@ -10,13 +10,6 @@
   <?php
       require './auxiliar.php';
 
-        const PAR = [
-            'articulo' => '',
-            'marca' => '',
-            'precio' => '',
-            'descripcion' => '',
-            'genero_id' => '',
-        ];
          extract(PAR);
          try{
 

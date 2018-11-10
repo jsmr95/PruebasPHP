@@ -9,6 +9,14 @@ class ParamException extends Exception
 class EmptyParamException extends Exception
 {}
 
+  const PAR = [
+      'articulo' => '',
+      'marca' => '',
+      'precio' => '',
+      'descripcion' => '',
+      'genero_id' => '',
+  ];
+
   function comprobarErrores(&$error){
     if (!empty($error)) {
       throw new ValidationException();
