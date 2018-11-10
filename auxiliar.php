@@ -174,22 +174,22 @@ function mostrarFormulario($pdo,$fila,$error,$accion){
           <form action="" method="post">
           <div class="form-group <?= hasError('articulo',$error) ?>" >
               <label for="articulo" class="control-label">Artículo</label>
-              <input type="text" name="articulo" class="form-control" id="articulo" value="<?= $fila['articulo'] ?>">
+              <input type="text" name="articulo" class="form-control" id="articulo" value="<?= h($fila['articulo']) ?>">
               <?php mensajeError('articulo', $error) ?>
           </div>
           <div class="form-group <?= hasError('marca',$error) ?>">
               <label for="marca" class="control-label">Marca</label>
-              <input type="text" name="marca" class="form-control" id="marca" value="<?= $fila['marca'] ?>">
+              <input type="text" name="marca" class="form-control" id="marca" value="<?= h($fila['marca']) ?>">
               <?php mensajeError('marca', $error) ?>
           </div>
           <div class="form-group <?= hasError('precio',$error) ?>">
               <label for="precio" class="control-label">Precio</label>
-              <input type="text" name="precio" class="form-control" id="precio" value="<?= $fila['precio'] ?>">
+              <input type="text" name="precio" class="form-control" id="precio" value="<?= h($fila['precio']) ?>">
               <?php mensajeError('precio', $error) ?>
           </div>
           <div class="form-group">
             <label for="descripcion" class="control-label">Descripción</label>
-            <textarea name="descripcion" rows="8" cols="80" class="form-control" id="descripcion"><?= $fila['descripcion'] ?></textarea>
+            <textarea name="descripcion" rows="8" cols="80" class="form-control" id="descripcion"><?= h($fila['descripcion']) ?></textarea>
           </div>
           <div class="form-group <?= hasError('genero_id',$error) ?>">
               <label for="genero_id" class="control-label">Género</label>
@@ -198,7 +198,7 @@ function mostrarFormulario($pdo,$fila,$error,$accion){
 
               <!-- Recorremos la sentencia para ir mostrando cada genero en las opciones -->
               <?php while ($genero = $st->fetch()): ?>
-              <option value="<?= $genero['id'] ?>" <?= generoSeleccionado($genero['id'],$fila['genero_id'])?>> <?= $genero['genero'] ?> </option>
+              <option value="<?= $genero['id'] ?>" <?= generoSeleccionado($genero['id'],$fila['genero_id'])?>> <?= h($genero['genero']) ?> </option>
             <?php endwhile ?>
           </select>
           </div>
@@ -209,4 +209,8 @@ function mostrarFormulario($pdo,$fila,$error,$accion){
     </div>
   </div>
   <?php
+}
+
+function h($cadena){
+    return htmlspecialchars($cadena, ENT_QUOTES);
 }
