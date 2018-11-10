@@ -38,7 +38,7 @@ class EmptyParamException extends Exception
   }
 
   function buscarArticulo($pdo, $id){
-    $st = $pdo->prepare('SELECT id
+    $st = $pdo->prepare('SELECT *
                           FROM productos
                           WHERE id = :id');
     $st->execute(['id' => $id]);
@@ -152,3 +152,8 @@ class EmptyParamException extends Exception
       <small class="help-block"> <?= $error[$key] ?></small> <?php
     }
   }
+
+  function generoSeleccionado($genero, $genero_id){
+
+  return $genero == $genero_id ? "selected" : "";
+}

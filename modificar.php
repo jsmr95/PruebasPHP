@@ -12,6 +12,7 @@
     require 'auxiliar.php';
 
     try{
+    $error = [];
     $pdo = conectar();
     $id = comprobarId();
     $fila = buscarArticulo($pdo, $id);
@@ -31,7 +32,7 @@
        $_SESSION['error'] = 'El producto no ha sido modificado.';
          header('Location: index.php');
      }
-
+     $st = $pdo->query('SELECT * FROM generos');
     ?>
     <div class="container">
       <div class="row">
@@ -44,30 +45,31 @@
             <form action="" method="post">
             <div class="form-group <?= hasError('articulo',$error) ?>" >
                 <label for="articulo" class="control-label">Artículo</label>
-                <input type="text" name="articulo" class="form-control" id="articulo" value="<?= $articulo ?>">
+                <input type="text" name="articulo" class="form-control" id="articulo" value="<?= $fila['articulo'] ?>">
                 <?php mensajeError('articulo', $error) ?>
             </div>
             <div class="form-group <?= hasError('marca',$error) ?>">
                 <label for="marca" class="control-label">Marca</label>
-                <input type="text" name="marca" class="form-control" id="marca" value="<?= $marca ?>">
+                <input type="text" name="marca" class="form-control" id="marca" value="<?= $fila['marca'] ?>">
                 <?php mensajeError('marca', $error) ?>
             </div>
             <div class="form-group <?= hasError('precio',$error) ?>">
                 <label for="precio" class="control-label">Precio</label>
-                <input type="text" name="precio" class="form-control" id="precio" value="<?= $precio ?>">
+                <input type="text" name="precio" class="form-control" id="precio" value="<?= $fila['precio'] ?>">
                 <?php mensajeError('precio', $error) ?>
             </div>
             <div class="form-group">
               <label for="descripcion" class="control-label">Descripción</label>
-              <textarea name="descripcion" rows="8" cols="80" class="form-control" id="descripcion"><?= $descripcion ?></textarea>
+              <textarea name="descripcion" rows="8" cols="80" class="form-control" id="descripcion"><?= $fila['descripcion'] ?></textarea>
             </div>
             <div class="form-group <?= hasError('genero_id',$error) ?>">
                 <label for="genero_id" class="control-label">Género</label>
                 <select class="form-control" name="genero_id" id="genero_id">
                   <?php mensajeError('genero_id', $error) ?>
+
                 <!-- Recorremos la sentencia para ir mostrando cada genero en las opciones -->
-                <?php while ($fila = $st->fetch()): ?>
-                <option value="<?= $fila['id'] ?>"> <?= $fila['genero'] ?> </option>
+                <?php while ($genero = $st->fetch()): ?>
+                <option value="<?= $genero['id'] ?>" <?= generoSeleccionado($genero['id'],$fila['genero_id'])?>> <?= $genero['genero'] ?> </option>
               <?php endwhile ?>
             </select>
             </div>
