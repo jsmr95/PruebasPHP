@@ -8,9 +8,30 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body>
-      
+    <?php
+    require 'auxiliar.php';
 
+    try{
+    $pdo = conectar();
+    $id = comprobarId();
+    $fila = buscarArticulo($pdo, $id);
+    comprobarParametros(PAR);
+    $valores = array_map('trim', $_POST);
+    $flt['articulo'] = compruebaArticulo($error);
+    $flt['marca'] = compruebaMarca($error);
+    $flt['precio'] = compruebaPrecio($error);
+    $flt['descripcion'] = trim(filter_input(INPUT_POST,'descripcion'));
+    $flt['genero_id'] = compruebaGeneroId($pdo,$error);
+    comprobarErrores($error);
+    modificarProducto($pdo, $flt, $id);
+    } catch (EmptyParamException|ValidationException $e){
+         //No hago nada
+     } catch (ParamException $e){
+       $_SESSION['error'] = 'El producto no ha sido modificado.';
+         header('Location: index.php');
+     }
 
+    ?>
     <div class="container">
       <div class="row">
           <br>

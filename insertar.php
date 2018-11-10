@@ -24,7 +24,7 @@
             $flt['descripcion'] = trim(filter_input(INPUT_POST,'descripcion'));
             $flt['genero_id'] = compruebaGeneroId($pdo,$error);
             comprobarErrores($error);
-            insertarPelicula($pdo,$flt);
+            insertarProducto($pdo,$flt);
             header('Location: index.php');
           }catch (EmptyParamException|ValidationException $e) {
                 $st = $pdo->prepare('SELECT *

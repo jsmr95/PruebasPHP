@@ -118,10 +118,29 @@ class EmptyParamException extends Exception
     return $fltPrecio;
   }
 
-  function insertarPelicula($pdo,$flt){
+  function comprobarId(){
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+    if ($id === null || $id === false) {
+      throw new ParamException();
+    }
+    return $id;
+  }
+
+  function insertarProducto($pdo,$flt){
     $st = $pdo->prepare('INSERT INTO productos (articulo, marca, precio, descripcion, genero_id)
                          VALUES (:articulo, :marca, :precio, :descripcion, :genero_id)');
     $st->execute($flt);
+  }
+
+  function modificarProducto($pdo,$flt, $id){
+    $st = $pdo->prepare('UPDATE productos
+                            SET articulo = :articulo
+                                , marca = :marca
+                                , precio = :precio
+                                , descripcion = :descripcion
+                                , genero_id = :genero_id
+                            WHERE id = :id');
+    $st->execute($flt + [':id' => $id]);
   }
 
   function hasError($key, $error){
