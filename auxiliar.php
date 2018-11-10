@@ -88,7 +88,9 @@ class EmptyParamException extends Exception
 
   function compruebaMarca(&$error){
     $fltMarca = trim(filter_input(INPUT_POST,'marca'));
-    if (mb_strlen($fltMarca) > 255) {
+    if ($fltMarca === '') {
+      $error['marca'] = 'La marca es obligatoria.';
+    } elseif (mb_strlen($fltMarca) > 255) {
       $error['marca'] = 'El nombre de la marca es demasiado largo.';
     }
     return $fltMarca;
