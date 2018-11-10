@@ -114,6 +114,9 @@
                       <td><a href="confirm_borrado.php?id=<?= $fila['id'] ?>" class="btn btn-danger btn-xs">
                             Borrar
                           </a>
+                          <a href="modificar.php?id=<?= $fila['id'] ?>" class="btn btn-info btn-xs">
+                                Modificar
+                              </a>
                       </td>
                   </tr>
                   <?php endwhile ?>
