@@ -45,34 +45,37 @@
 
           ?>
         </div>
-          <div class="row" id="busqueda">
-            <div class="col-md-12">
+          <div class="row form-inline" id="busqueda">
               <fieldset>
                   <legend>Buscar</legend>
                   <!-- Creamos un buscador de articulos por nombre-->
                   <form action="" method="get" class="form-inline">
+                    <div class="col-md-4">
                     <div class="form-group">
                       <label for="buscarArticulo">Buscar por nombre:</label>
                       <input id="buscarArticulo" type="text" name="buscarArticulo"
                       value="<?= $buscarArticulo ?>" class="form-control">
                     </div>
-
-                  <!-- Creamos un buscador de articulos por marca--> <br>
+                    </div>
+                    <div class="col-md-4">
+                  <!-- Creamos un buscador de articulos por marca-->
                   <div class="form-group">
                     <label for="buscarMarca">Buscar por marca:</label>
                     <input id="buscarMarca" type="text" name="buscarMarca"
                     value="<?= $buscarMarca ?>" class="form-control">
                   </div>
-                    <!-- Creamos un buscador de articulos por genero--> <br>
+                </div>
+                  <div class="col-md-4">
+                    <!-- Creamos un buscador de articulos por genero-->
                     <div class="form-group">
                       <label for="buscarGenero">Buscar por género:</label>
                       <input id="buscarGenero" type="text" name="buscarGenero"
                       value="<?= $buscarGenero ?>" class="form-control">
-                    </div><br>
+                    </div><br><br>
+                  </div>
                     <input type="submit" value="Buscar" class="btn btn-primary">
                   </form>
-              </fieldset>
-          </div>
+        </fieldset>
         </div>
       <hr>
       <div class="row">
