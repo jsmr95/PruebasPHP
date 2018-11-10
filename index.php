@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <style media="screen">
             #busqueda { margin-top: 1em; }
+            .estilo1 { background: #C5E1F5;}
         </style>
     </head>
     <body>
@@ -31,7 +32,7 @@
               <?php
             }
           }
-          //Comprueba si esta buscando articulo por nombre
+          //Comprueba si esta buscando algun articulo
           $buscarArticulo = isset($_GET['buscarArticulo'])
                           ? trim($_GET['buscarArticulo'])
                           : '';
@@ -45,38 +46,50 @@
 
           ?>
         </div>
-          <div class="row form-inline" id="busqueda">
-              <fieldset>
-                  <legend>Buscar</legend>
-                  <!-- Creamos un buscador de articulos por nombre-->
-                  <form action="" method="get" class="form-inline">
-                    <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="buscarArticulo">Buscar por nombre:</label>
-                      <input id="buscarArticulo" type="text" name="buscarArticulo"
-                      value="<?= $buscarArticulo ?>" class="form-control">
+        <div class="row form-inline" id="busqueda">
+            <fieldset>
+              <legend>Buscar</legend>
+              <!-- Creamos un buscador de articulos por nombre-->
+              <form action="" method="get" class="form-inline">
+                <div class="col-md-4">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <div class="form-group">
+                        <label for="buscarArticulo">Buscar por nombre:</label>
+                        <input id="buscarArticulo" class="form-control estilo1" type="text" name="buscarArticulo"
+                        value="<?= $buscarArticulo ?>" class="form-control">
+                      </div>
                     </div>
-                    </div>
-                    <div class="col-md-4">
-                  <!-- Creamos un buscador de articulos por marca-->
+                  </div>
+                </div>
+                <div class="col-md-4">
+              <!-- Creamos un buscador de articulos por marca-->
+              <div class="panel panel-default">
+                <div class="panel-body">
                   <div class="form-group">
                     <label for="buscarMarca">Buscar por marca:</label>
                     <input id="buscarMarca" type="text" name="buscarMarca"
                     value="<?= $buscarMarca ?>" class="form-control">
                   </div>
                 </div>
-                  <div class="col-md-4">
-                    <!-- Creamos un buscador de articulos por genero-->
+              </div>
+            </div>
+              <div class="col-md-4">
+                <!-- Creamos un buscador de articulos por genero-->
+                <div class="panel panel-default">
+                  <div class="panel-body">
                     <div class="form-group">
                       <label for="buscarGenero">Buscar por género:</label>
                       <input id="buscarGenero" type="text" name="buscarGenero"
                       value="<?= $buscarGenero ?>" class="form-control">
-                    </div><br><br>
+                    </div>
                   </div>
-                    <input type="submit" value="Buscar" class="btn btn-primary">
-                  </form>
-        </fieldset>
-        </div>
+                </div>
+              </div>
+                <input type="submit" value="Buscar" class="btn btn-primary">
+              </form>
+            </fieldset>
+          </div>
       <hr>
       <div class="row">
         <div class="col-md-12">
