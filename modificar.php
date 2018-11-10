@@ -24,6 +24,7 @@
     $flt['genero_id'] = compruebaGeneroId($pdo,$error);
     comprobarErrores($error);
     modificarProducto($pdo, $flt, $id);
+    header('Location: index.php');
     } catch (EmptyParamException|ValidationException $e){
          //No hago nada
      } catch (ParamException $e){
