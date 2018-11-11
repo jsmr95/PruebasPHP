@@ -243,13 +243,13 @@ function navegadorInicio(){ ?>
 
 function navegador(){ ?>
 <nav class="navbar navbar-default">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand " href="../index.php">Bienvenido</a>
                     <a class="navbar-brand " href="index.php">Todos los articulos</a>
                 </div>
                 <div class="navbar-text navbar-right">
-                    <a href="" class="btn btn-success">Login</a>
+                    <a href="" class="btn btn-success" style="margin-right: 100px;">Login</a>
                 </div>
             </div>
         </nav>

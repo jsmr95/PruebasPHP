@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start();
+require '../auxiliar.php';
+navegador();?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
     <head>
@@ -18,7 +20,6 @@
       <div class="container">
         <div class="row">
           <?php
-          require '../auxiliar.php';
 
           $pdo = conectar();
           if (isset($_POST['id'])) {

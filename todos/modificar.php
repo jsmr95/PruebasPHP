@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start();
+require '../auxiliar.php';
+navegador(); ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
     <head>
@@ -10,7 +12,6 @@
     </head>
     <body>
     <?php
-    require '../auxiliar.php';
 
     try{
     $error = [];
