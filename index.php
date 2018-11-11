@@ -113,10 +113,10 @@
                                                           tb devuelve la fila, si la hay, por lo que entra,cuando no hay mas filas, da false y se sale.-->
                   <tr class="fondoTabla">
                       <td><?= filter_var($fila['articulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?></td>
-                      <td><?= $fila['marca'] ?></td>
-                      <td><?= $fila['precio'] ?>€</td>
-                      <td><?= $fila['descripcion'] ?></td>
-                      <td><?= $fila['genero'] ?></td>
+                      <td><?= h($fila['marca']) ?></td>
+                      <td><?= h($fila['precio']) ?>€</td>
+                      <td><?= h($fila['descripcion']) ?></td>
+                      <td><?= h($fila['genero']) ?></td>
                       <td><a href="confirm_borrado.php?id=<?= $fila['id'] ?>" class="btn btn-danger btn-xs">
                             Borrar
                           </a>
