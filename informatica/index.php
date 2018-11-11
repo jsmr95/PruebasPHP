@@ -1,5 +1,6 @@
 <?php session_start();
 require '../auxiliar.php';
+require 'auxiliar.php';
 navegador();?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
@@ -43,10 +44,7 @@ navegador();?>
           $buscarMarca = isset($_GET['buscarMarca'])
                           ? trim($_GET['buscarMarca'])
                           : '';
-          $buscarGenero = isset($_GET['buscarGenero'])
-                          ? trim($_GET['buscarGenero'])
-                          : '';
-          $st = compruebaBuscadores($pdo,$buscarArticulo,$buscarMarca,$buscarGenero);
+          $st = compruebaBuscadoresInformatica($pdo,$buscarArticulo,$buscarMarca);
 
           ?>
         </div>

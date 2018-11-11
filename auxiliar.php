@@ -247,7 +247,7 @@ function navegador(){ ?>
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand " href="../index.php">Bienvenido</a>
-                    <a class="navbar-brand " href="index.php">Todos los articulos</a>
+                    <a class="navbar-brand " href="../todos/index.php">Todos los articulos</a>
                     <a class="navbar-brand " href="../informatica/index.php">Informática</a>
 
                 </div>
