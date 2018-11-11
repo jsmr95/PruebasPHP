@@ -35,7 +35,7 @@ navegador();?>
         </div>
         <div class="row form-inline" id="busqueda">
             <fieldset>
-              <legend>Buscar</legend>
+              <legend>Buscar en 'Informatica'</legend>
               <!-- Creamos un buscador de articulos por nombre-->
               <form action="" method="get" class="form-inline">
                 <div class="col-md-6">
@@ -74,7 +74,6 @@ navegador();?>
                   <th>Marca</th>
                   <th>Precio</th>
                   <th>Descripción</th>
-                  <th>Género</th>
               </thead>
               <tbody>
                   <?php while ($fila = $st->fetch()): ?> <!-- Podemos asignarselo a fila, ya que en la asignación,
@@ -84,7 +83,6 @@ navegador();?>
                       <td><?= h($fila['marca']) ?></td>
                       <td><?= h($fila['precio']) ?>€</td>
                       <td><?= h($fila['descripcion']) ?></td>
-                      <td><?= h($fila['genero']) ?></td>
                   </tr>
                   <?php endwhile ?>
               </tbody>
