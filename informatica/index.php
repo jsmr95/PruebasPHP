@@ -1,6 +1,5 @@
 <?php session_start();
 require '../auxiliar.php';
-require 'auxiliar.php';
 navegador();?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
@@ -30,7 +29,7 @@ navegador();?>
           $buscarMarca = isset($_GET['buscarMarca'])
                           ? trim($_GET['buscarMarca'])
                           : '';
-          $st = compruebaBuscadoresInformatica($pdo,$buscarArticulo,$buscarMarca);
+          $st = compruebaBuscadoresSinGenero($pdo,$buscarArticulo,$buscarMarca,'Informatica');
 
           ?>
         </div>
