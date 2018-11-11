@@ -225,3 +225,33 @@ function comprobarSession($var, $tipo){
         <?php unset($_SESSION["$var"]); ?>
     <?php endif;
 }
+
+function navegadorInicio(){ ?>
+<nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand " href="index.php">Bienvenido</a>
+                    <a class="navbar-brand " href="./todos/index.php">Todos los articulos</a>
+                </div>
+                <div class="navbar-text navbar-right">
+                    <a href="" class="btn btn-success" style="margin-right: 100px;">Login</a>
+                </div>
+            </div>
+        </nav>
+<?php
+}
+
+function navegador(){ ?>
+<nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand " href="../index.php">Bienvenido</a>
+                    <a class="navbar-brand " href="index.php">Todos los articulos</a>
+                </div>
+                <div class="navbar-text navbar-right">
+                    <a href="" class="btn btn-success">Login</a>
+                </div>
+            </div>
+        </nav>
+<?php
+}

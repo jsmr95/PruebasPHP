@@ -10,16 +10,9 @@
   <body>
     <?php
     require './auxiliar.php';
+
+    navegadorInicio();
     ?>
-    <nav class="navbar navbar-default">
-    <div class="container-fluid">
-          <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <a class="navbar-brand" href="#">Bienvenido!</a>
-        <a class="navbar-brand" href="#">Informatica</a>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-    </nav>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
