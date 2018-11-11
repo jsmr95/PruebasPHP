@@ -10,7 +10,7 @@
   </head>
   <body>
     <?php
-    require 'auxiliar.php';
+    require '../auxiliar.php';
 
     $pdo = conectar();
     if (isset($_GET['id'])) {
