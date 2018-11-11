@@ -29,11 +29,9 @@ navegador();?>
             $st->execute([':id' => "$id"]);
             if (buscarArticulo($pdo, $id) === false) {
               $_SESSION['mensaje'] = 'El producto ha sido borrado correctamente.';
-              header('Location: index.php');
             }
             } else {
               $_SESSION['error'] = 'El producto no existe.';
-              header('Location: index.php');
             }
           }
           //Comprueba si esta buscando algun articulo
