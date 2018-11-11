@@ -17,8 +17,6 @@
         <div class="row">
           <?php
           require 'auxiliar.php';
-          comprobarSession('mensaje', 'success');
-          comprobarSession('mensaje', 'error');
 
           $pdo = conectar();
           if (isset($_POST['id'])) {
@@ -93,7 +91,10 @@
               </form>
             </fieldset>
           </div>
-      <hr>
+      <hr> <?php
+      comprobarSession('mensaje', 'success');
+      comprobarSession('mensaje', 'error');
+      ?>
       <div class="row">
         <div class="col-md-12">
           <table class="table table-bordered table-hover table-striped">

@@ -26,13 +26,12 @@
             $flt['genero_id'] = compruebaGeneroId($pdo,$error);
             comprobarErrores($error);
             insertarProducto($pdo,$flt);
+            $_SESSION['mensaje'] = "El nuevo producto ha sido insertado.";
             header('Location: index.php');
           }catch (EmptyParamException|ValidationException $e) {
-                $st = $pdo->prepare('SELECT *
-                                    FROM generos');
-                $st->execute([]);
                 //No hacemos nada
           }catch(ParamException $e) {
+            $_SESSION['error'] = "El nuevo producto no ha sido insertado.";
             header('Location: index.php');
          }
 
