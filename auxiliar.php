@@ -232,6 +232,7 @@ function navegadorInicio(){ ?>
                 <div class="navbar-header">
                     <a class="navbar-brand " href="index.php">Bienvenido</a>
                     <a class="navbar-brand " href="./todos/index.php">Todos los articulos</a>
+                    <a class="navbar-brand " href="./informatica/index.php">Informática</a>
                 </div>
                 <div class="navbar-text navbar-right">
                     <a href="" class="btn btn-success" style="margin-right: 100px;">Login</a>
@@ -247,6 +248,8 @@ function navegador(){ ?>
                 <div class="navbar-header">
                     <a class="navbar-brand " href="../index.php">Bienvenido</a>
                     <a class="navbar-brand " href="index.php">Todos los articulos</a>
+                    <a class="navbar-brand " href="../informatica/index.php">Informática</a>
+
                 </div>
                 <div class="navbar-text navbar-right">
                     <a href="" class="btn btn-success" style="margin-right: 100px;">Login</a>
