@@ -9,7 +9,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <style media="screen">
             #busqueda { margin-top: 1em; }
-            .estilo1 { background: #C5E1F5;}
+            .fondo { background: #6ACA2B;}
+            .fondoTabla {background: #B0DF91;}
+            #fondoTabla {background: #B0DF91;}
         </style>
     </head>
     <body>
@@ -53,7 +55,7 @@
               <!-- Creamos un buscador de articulos por nombre-->
               <form action="" method="get" class="form-inline">
                 <div class="col-md-4">
-                  <div class="panel panel-default">
+                  <div class="panel panel-default" id="fondoTabla">
                     <div class="panel-body">
                       <div class="form-group">
                         <label for="buscarArticulo">Buscar por nombre:</label>
@@ -65,7 +67,7 @@
                 </div>
                 <div class="col-md-4">
               <!-- Creamos un buscador de articulos por marca-->
-              <div class="panel panel-default">
+              <div class="panel panel-default" id="fondoTabla">
                 <div class="panel-body">
                   <div class="form-group">
                     <label for="buscarMarca">Buscar por marca:</label>
@@ -77,7 +79,7 @@
             </div>
               <div class="col-md-4">
                 <!-- Creamos un buscador de articulos por genero-->
-                <div class="panel panel-default">
+                <div class="panel panel-default" id="fondoTabla">
                   <div class="panel-body">
                     <div class="form-group">
                       <label for="buscarGenero">Buscar por género:</label>
@@ -97,8 +99,8 @@
       ?>
       <div class="row">
         <div class="col-md-12">
-          <table class="table table-bordered table-hover table-striped">
-              <thead>
+          <table class="table table-bordered table-hover">
+              <thead class="fondo">
                   <th>Articulo</th>
                   <th>Marca</th>
                   <th>Precio</th>
@@ -109,7 +111,7 @@
               <tbody>
                   <?php while ($fila = $st->fetch()): ?> <!-- Podemos asignarselo a fila, ya que en la asignación,
                                                           tb devuelve la fila, si la hay, por lo que entra,cuando no hay mas filas, da false y se sale.-->
-                  <tr>
+                  <tr class="fondoTabla">
                       <td><?= filter_var($fila['articulo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?></td>
                       <td><?= $fila['marca'] ?></td>
                       <td><?= $fila['precio'] ?>€</td>
