@@ -23,18 +23,6 @@ navegador();?>
           <?php
 
           $pdo = conectar();
-          if (isset($_POST['id'])) {
-            $id = $_POST['id'];
-            if (buscarArticulo($pdo, $id)) {
-            $st = $pdo->prepare('DELETE FROM productos WHERE id = :id');
-            $st->execute([':id' => "$id"]);
-            if (buscarArticulo($pdo, $id) === false) {
-              $_SESSION['mensaje'] = 'El producto ha sido borrado correctamente.';
-            }
-            } else {
-              $_SESSION['error'] = 'El producto no existe.';
-            }
-          }
           //Comprueba si esta buscando algun articulo
           $buscarArticulo = isset($_GET['buscarArticulo'])
                           ? trim($_GET['buscarArticulo'])
@@ -78,10 +66,7 @@ navegador();?>
               </form>
             </fieldset>
           </div>
-      <hr> <?php
-      comprobarSession('mensaje', 'success');
-      comprobarSession('mensaje', 'error');
-      ?>
+      <hr>
       <div class="row">
         <div class="col-md-12">
           <table class="table table-bordered table-hover">
@@ -91,7 +76,6 @@ navegador();?>
                   <th>Precio</th>
                   <th>Descripción</th>
                   <th>Género</th>
-                  <th>Acciones</th>
               </thead>
               <tbody>
                   <?php while ($fila = $st->fetch()): ?> <!-- Podemos asignarselo a fila, ya que en la asignación,
@@ -102,22 +86,10 @@ navegador();?>
                       <td><?= h($fila['precio']) ?>€</td>
                       <td><?= h($fila['descripcion']) ?></td>
                       <td><?= h($fila['genero']) ?></td>
-                      <td><a href="confirm_borrado.php?id=<?= $fila['id'] ?>" class="btn btn-danger btn-xs">
-                            Borrar
-                          </a>
-                          <a href="modificar.php?id=<?= $fila['id'] ?>" class="btn btn-info btn-xs">
-                                Modificar
-                              </a>
-                      </td>
                   </tr>
                   <?php endwhile ?>
               </tbody>
           </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="text-center">
-          <a href="insertar.php" class="btn btn-primary">Insertar articulo nuevo</a>
         </div>
       </div>
     </div><br>
